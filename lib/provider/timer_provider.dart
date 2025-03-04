@@ -39,13 +39,8 @@ class TimerProvider extends ChangeNotifier {
 
   Future<void> _playMusic() async {
     if (_isPaused) return;
+    await _audioPlayer.setReleaseMode(ReleaseMode.loop);
     await _audioPlayer.play(AssetSource('nature.mp3'));
-
-    _audioPlayer.onPlayerComplete.listen((event) {
-      if (_isRunning) {
-        _playMusic();
-      }
-    });
   }
 
   void pauseTimer() async {
